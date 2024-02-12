@@ -8,6 +8,7 @@ const products = {
     "vitamin-c-500-250": { name: "Vitamin C 500mg", price: 12.99 },
     "kids-songbook": { name: "Kids Songbook", price: 7.99 },
     "sugar-cane-1kg": { name: "Sugar Cane 1kg", price: 4.99 },
+    "empty water bottle": { name: "empty water bottle", price: 10000 }
 };
 
 // Your hardcoded item list
