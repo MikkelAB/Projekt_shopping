@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import React, { useState } from 'react';
 
@@ -17,7 +17,7 @@ const itemList = [
     { product: products["sugar-cane-1kg"], quantity: 2, giftWrap: false },
 ];
 
-const BasketItem = ({ item, onChangeQuantity, onRemoveItem, onToggleGiftWrap }) => {
+const BasketItem = ({item, onChangeQuantity, onRemoveItem, onToggleGiftWrap, onChangeRecurring}) => {
     return (
         <div className="basket-item">
             <div>Name: {item.product.name}</div>
@@ -40,6 +40,20 @@ const BasketItem = ({ item, onChangeQuantity, onRemoveItem, onToggleGiftWrap }) 
                     />
                 </label>
             </div>
+            <label>
+                Recurring Order:
+                <select
+                    value={item.recurring || ''}
+                    onChange={(e) => onChangeRecurring(item.name, e.target.value)}
+                >
+                    <option value="">None</option>
+                    <option value="1 month">1 Month</option>
+                    <option value="6 months">6 Months</option>
+                    <option value="1 year">1 Year</option>
+                </select>
+            </label>
+            <div>
+            </div>
             <button onClick={() => onRemoveItem(item.product.name)}>Remove Item</button>
         </div>
     );
@@ -49,7 +63,8 @@ const Basket = () => {
     const [items, setItems] = useState(itemList.map(item => ({
         ...item,
         name: item.product.name,
-        price: item.product.price
+        price: item.product.price,
+        recurring: ''
     })));
 
     const onChangeQuantity = (name, newQuantity) => {
@@ -68,6 +83,15 @@ const Basket = () => {
         ));
     };
 
+    const onChangeRecurring = (name, schedule) => {
+        setItems(prevItems => prevItems.map(item =>
+            item.name === name ? { ...item, recurring: schedule } : item
+        ));
+    };
+
+
+
+
     const getTotalAmount = () => {
         return items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
     };
@@ -82,6 +106,7 @@ const Basket = () => {
                     onChangeQuantity={onChangeQuantity}
                     onRemoveItem={onRemoveItem}
                     onToggleGiftWrap={onToggleGiftWrap}
+                    onChangeRecurring={onChangeRecurring}
                 />
 
             ))}
