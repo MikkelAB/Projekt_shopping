@@ -1,20 +1,19 @@
-
 import './App.css';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 
 // Simulate the products database
 const products = {
-    "vitamin-c-500-250": { name: "Vitamin C 500mg", price: 12.99 },
-    "kids-songbook": { name: "Kids Songbook", price: 7.99 },
-    "sugar-cane-1kg": { name: "Sugar Cane 1kg", price: 4.99 },
+    "vitamin-c-500-250": {name: "Vitamin C 500mg", price: 12.99},
+    "kids-songbook": {name: "Kids Songbook", price: 7.99},
+    "sugar-cane-1kg": {name: "Sugar Cane 1kg", price: 4.99},
 };
 
 // Your hardcoded item list
 const itemList = [
-    { product: products["vitamin-c-500-250"], quantity: 2, giftWrap: false },
-    { product: products["kids-songbook"], quantity: 1, giftWrap: true },
-    { product: products["sugar-cane-1kg"], quantity: 2, giftWrap: false },
+    {product: products["vitamin-c-500-250"], quantity: 2, giftWrap: false},
+    {product: products["kids-songbook"], quantity: 1, giftWrap: true},
+    {product: products["sugar-cane-1kg"], quantity: 2, giftWrap: false},
 ];
 
 const BasketItem = ({item, onChangeQuantity, onRemoveItem, onToggleGiftWrap, onChangeRecurring}) => {
@@ -69,7 +68,7 @@ const Basket = () => {
 
     const onChangeQuantity = (name, newQuantity) => {
         setItems(prevItems => prevItems.map(item =>
-            item.name === name ? { ...item, quantity: newQuantity } : item
+            item.name === name ? {...item, quantity: newQuantity} : item
         ));
     };
 
@@ -79,17 +78,15 @@ const Basket = () => {
 
     const onToggleGiftWrap = (name) => {
         setItems(prevItems => prevItems.map(item =>
-            item.name === name ? { ...item, giftWrap: !item.giftWrap } : item
+            item.name === name ? {...item, giftWrap: !item.giftWrap} : item
         ));
     };
 
     const onChangeRecurring = (name, schedule) => {
         setItems(prevItems => prevItems.map(item =>
-            item.name === name ? { ...item, recurring: schedule } : item
+            item.name === name ? {...item, recurring: schedule} : item
         ));
     };
-
-
 
 
     const getTotalAmount = () => {
